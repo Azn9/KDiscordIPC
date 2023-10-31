@@ -48,7 +48,7 @@ class SocketHandler(
                 }
             } catch (e: IOException) {
                 if (!isDisconnectionException(e)) {
-                    KDiscordIPC.logger.error("An error occurred when attempting to read from the Discord socket. (Attempting to disconnect if not disconnected already!): ", e)
+                    KDiscordIPC.logger.warn("An error occurred when attempting to read from the Discord socket. (Attempting to disconnect if not disconnected already!): ", e)
                 }
 
                 disconnect()
@@ -62,7 +62,7 @@ class SocketHandler(
                 socket.write(it)
             } catch (e: IOException) {
                 if (!isDisconnectionException(e)) {
-                    KDiscordIPC.logger.error("An error occurred when attempting to write to the Discord socket. (Attempting to disconnect if not disconnected already!): ", e)
+                    KDiscordIPC.logger.warn("An error occurred when attempting to write to the Discord socket. (Attempting to disconnect if not disconnected already!): ", e)
                 }
 
                 // Attempt to disconnect, if that fails, an error will be thrown anyway. We can't send errors back

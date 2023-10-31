@@ -1,4 +1,4 @@
-rootProject.name = "KDiscordIPC"
+rootProject.name = "azn9_KDiscordIPC"
 
 enableFeaturePreview("VERSION_CATALOGS")
 dependencyResolutionManagement {
