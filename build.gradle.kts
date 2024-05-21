@@ -2,11 +2,13 @@ plugins {
     kotlin("jvm") version "1.6.20"
     kotlin("plugin.serialization") version "1.6.20"
 
+    id("net.linguica.maven-settings") version "0.5"
+
     `maven-publish`
 }
 
 group = "dev.cbyrne"
-version = "0.2.2"
+version = "0.2.3"
 
 repositories {
     mavenCentral()
@@ -36,6 +38,12 @@ dependencies {
 }
 
 publishing {
+    repositories {
+        mavenLocal()
+        maven("https://nexus.azn9.dev/repository/public/") {
+            name = "azn9public"
+        }
+    }
     publications {
         create<MavenPublication>("maven") {
             from(components["java"])
