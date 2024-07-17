@@ -13,7 +13,7 @@ import java.io.RandomAccessFile
  * This uses a RandomAccessFile to expose an [InputStream] and [OutputStream]
  */
 class WindowsSocket : Socket {
-    private lateinit var randomAccessFile: RandomAccessFile
+    private var randomAccessFile: RandomAccessFile? = null
     private var _connected = false
 
     override val connected: Boolean
@@ -25,26 +25,26 @@ class WindowsSocket : Socket {
     }
 
     override fun close() {
-        randomAccessFile.close()
+        randomAccessFile?.close()
         _connected = false
     }
 
     @Suppress("ControlFlowWithEmptyBody")
     override fun read(): RawPacket {
-        while (_connected && randomAccessFile.length() == 0L) {
+        while (_connected && randomAccessFile!!.length() == 0L) {
             Thread.sleep(50L)
         }
 
-        val opcode = randomAccessFile.readInt().reverse()
-        val length = randomAccessFile.readInt().reverse()
+        val opcode = randomAccessFile!!.readInt().reverse()
+        val length = randomAccessFile!!.readInt().reverse()
 
         val data = ByteArray(length)
-        randomAccessFile.readFully(data)
+        randomAccessFile!!.readFully(data)
 
         return RawPacket(opcode, length, data)
     }
 
     override fun write(bytes: ByteArray) {
-        randomAccessFile.write(bytes)
+        randomAccessFile?.write(bytes)
     }
 }
