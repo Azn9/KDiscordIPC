@@ -89,7 +89,7 @@ class SocketHandler(
         try {
             socket.connect(findIPCFile(index))
         } catch (e: IOException) {
-            throw ConnectionError.Failed
+            throw ConnectionError.Failed(e)
         }
     }
 
