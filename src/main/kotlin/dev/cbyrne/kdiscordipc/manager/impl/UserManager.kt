@@ -32,7 +32,7 @@ class UserManager(override val ipc: KDiscordIPC) : Manager() {
      *
      * @param id the id of the user to fetch
      */
-    suspend fun getUser(id: String): User {
+    suspend fun getUser(id: String): User? {
         val response: InboundGetUserPacket = ipc.sendPacket(GetUserPacket(id))
         return response.data
     }

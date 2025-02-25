@@ -22,7 +22,7 @@ object ByteToMessageDecoder {
             return json.decodeFromString<InboundPacket>(data)
         } catch (e: SerializationException) {
             // We didn't receive the full data, probably because the socket was closed.
-            throw DecodeError.InvalidData
+            throw e//DecodeError.InvalidData(e)
         } catch (e: IllegalStateException) {
             if (e.message?.lowercase()?.contains("unknown packet command") == true) {
                 return null

@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class GetUserPacket(
-    override val data: User,
+    override val data: User?,
     override val cmd: String = "GET_USER",
     override val opcode: Int = 0x01,
     override val nonce: String = "0"

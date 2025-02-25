@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable(with = InboundPacketSerializer::class)
 abstract class InboundPacket {
-    abstract val opcode: Int
+    abstract val opcode: Int?
 
     abstract val cmd: String?
 
