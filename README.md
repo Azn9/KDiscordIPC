@@ -15,7 +15,7 @@ https://github.com/caoimhebyrne/JDiscordIPC
 
 # KDiscordIPC
 
-``Current version: 0.2.7``
+``Current version: 0.2.8``
 
 A lightweight and easy to use Discord IPC wrapper for Kotlin
 
@@ -44,7 +44,7 @@ repositories {
 }
 
 dependencies {
-    implementation("com.github.caoimhebyrne:KDiscordIPC:0.2.2")
+    implementation("com.github.Azn9:KDiscordIPC:0.2.8")
 }
 ```
 
@@ -70,8 +70,10 @@ ipc.connect()
 
 ## Maintainers
 
+[Axel Joly](https://github.com/Azn9)
 [Caoimhe Byrne](https://github.com/caoimhebyrne)
 
 ## License
 
 MIT © 2023 Caoimhe Byrne
+MIT © 2025 Axel Joly
