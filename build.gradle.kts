@@ -1,3 +1,6 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import kotlin.collections.plus
+
 plugins {
     kotlin("jvm") version "1.6.20"
     kotlin("plugin.serialization") version "1.6.20"
@@ -8,7 +11,7 @@ plugins {
 }
 
 group = "dev.cbyrne"
-version = "0.2.7"
+version = "0.2.8"
 
 repositories {
     mavenCentral()
@@ -51,7 +54,11 @@ publishing {
     }
 }
 
-tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
-    kotlinOptions.freeCompilerArgs += "-opt-in=kotlinx.serialization.ExperimentalSerializationApi"
-    kotlinOptions.freeCompilerArgs += "-opt-in=kotlinx.serialization.InternalSerializationApi"
+tasks.withType<KotlinCompile>().configureEach {
+    kotlinOptions {
+        jvmTarget = "11"
+        freeCompilerArgs += "-Xjvm-default=all"
+        freeCompilerArgs += "-opt-in=kotlinx.serialization.ExperimentalSerializationApi"
+        freeCompilerArgs += "-opt-in=kotlinx.serialization.InternalSerializationApi"
+    }
 }

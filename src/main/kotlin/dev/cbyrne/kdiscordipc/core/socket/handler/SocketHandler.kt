@@ -131,7 +131,7 @@ class SocketHandler(
         if (index > 9)
             throw ConnectionError.NoIPCFile
 
-        val base = if (platform == Platform.WINDOWS) "\\\\?\\pipe\\" else temporaryDirectory
+        val base = if (platform == Platform.WINDOWS) "\\\\.\\pipe\\" else temporaryDirectory
         val file = File(base, "discord-ipc-${index}")
         return file.takeIf { it.exists() } ?: findIPCFile(index + 1)
     }
