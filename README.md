@@ -1,5 +1,11 @@
 # MAINTENANCE NOTE
 
+## A note from Azn9
+Hey!
+I forked this repository as it is used in the [Jetbrains-Discord-Integration](https://github.com/Azn9/JetBrains-Discord-Integration) plugin. I do not plan to maintain this repository outside an issue related to the plugin. Please see the below notice for more information.
+
+
+## Original notice
 Hi everyone!
 
 KDiscordIPC is entering maintenance-only. This means it will not be receiving any new features, and will only be updated for major bug patches.
@@ -12,6 +18,8 @@ Much love,
 Caoimhe.
 
 https://github.com/caoimhebyrne/JDiscordIPC
+
+---
 
 # KDiscordIPC
 
@@ -35,8 +43,9 @@ supported
 
 ## Install
 
-You can add KDiscordIPC to your project via [Jitpack](https://jitpack.io).
+You can add KDiscordIPC to your project via [Jitpack](https://jitpack.io) or my repository:
 
+1. Using Jitpack:
 ```kts
 repositories {
     mavenCentral()
@@ -45,6 +54,17 @@ repositories {
 
 dependencies {
     implementation("com.github.Azn9:KDiscordIPC:0.2.8")
+}
+```
+
+2. Using my repository:
+```kts
+repositories {
+    mavenCentral()
+    maven(url = "https://nexus.azn9.dev/repository/public/")
+}
+dependencies {
+    implementation("dev.cbyrne:azn9_KDiscordIPC:0.2.8")
 }
 ```
 
@@ -70,10 +90,10 @@ ipc.connect()
 
 ## Maintainers
 
-[Axel Joly](https://github.com/Azn9)
-[Caoimhe Byrne](https://github.com/caoimhebyrne)
+- [Axel Joly](https://github.com/Azn9)
+- [Caoimhe Byrne](https://github.com/caoimhebyrne)
 
 ## License
 
-MIT © 2023 Caoimhe Byrne
-MIT © 2025 Axel Joly
+- MIT © 2022-2025 Caoimhe Byrne
+- MIT © 2025 Axel Joly
