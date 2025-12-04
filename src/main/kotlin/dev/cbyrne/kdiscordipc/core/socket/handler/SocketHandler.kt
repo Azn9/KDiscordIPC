@@ -44,12 +44,18 @@ class SocketHandler(
                 ByteToMessageDecoder.decode(rawPacket)?.let { emit(it) }
             } catch (e: DecodeError) {
                 if (e is DecodeError.InvalidData) {
-                    KDiscordIPC.logger.warn("Received invalid data, assuming that Discord has disconnected from the socket.", e)
+                    KDiscordIPC.logger.warn(
+                        "Received invalid data, assuming that Discord has disconnected from the socket.",
+                        e
+                    )
                     disconnect()
                 }
             } catch (e: IOException) {
                 if (!isDisconnectionException(e)) {
-                    KDiscordIPC.logger.warn("An error occurred when attempting to read from the Discord socket. (Attempting to disconnect if not disconnected already!): ", e)
+                    KDiscordIPC.logger.warn(
+                        "An error occurred when attempting to read from the Discord socket. (Attempting to disconnect if not disconnected already!): ",
+                        e
+                    )
                 }
 
                 disconnect()
@@ -63,7 +69,10 @@ class SocketHandler(
                 socket.write(it)
             } catch (e: IOException) {
                 if (!isDisconnectionException(e)) {
-                    KDiscordIPC.logger.warn("An error occurred when attempting to write to the Discord socket. (Attempting to disconnect if not disconnected already!): ", e)
+                    KDiscordIPC.logger.warn(
+                        "An error occurred when attempting to write to the Discord socket. (Attempting to disconnect if not disconnected already!): ",
+                        e
+                    )
                 }
 
                 // Attempt to disconnect, if that fails, an error will be thrown anyway. We can't send errors back
@@ -131,9 +140,16 @@ class SocketHandler(
         if (index > 9)
             throw ConnectionError.NoIPCFile
 
-        val base = if (platform == Platform.WINDOWS) "\\\\.\\pipe\\" else temporaryDirectory
-        val file = File(base, "discord-ipc-${index}")
-        return file.takeIf { it.exists() } ?: findIPCFile(index + 1)
+        return if (platform == Platform.WINDOWS) {
+            val dotFile = File("\\\\.\\pipe\\", "discord-ipc-${index}")
+            val questionMarkFile = File("\\\\?\\pipe\\", "discord-ipc-${index}")
+
+            dotFile.takeIf { it.exists() } ?: questionMarkFile.takeIf { it.exists() } ?: findIPCFile(index + 1)
+        } else {
+            val file = File(temporaryDirectory, "discord-ipc-${index}")
+
+            file.takeIf { it.exists() } ?: findIPCFile(index + 1)
+        }
     }
 
     /**
